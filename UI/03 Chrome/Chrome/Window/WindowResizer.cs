@@ -5,6 +5,13 @@ using System.Windows.Interop;
 
 namespace Chrome
 {
+    public enum WindowDockPosition
+    {
+        Undocked,
+        Left,
+        Right,
+    }
+
     public class WindowResizer
     {
         #region Private Members

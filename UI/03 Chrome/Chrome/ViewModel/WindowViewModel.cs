@@ -15,7 +15,10 @@ namespace Chrome
         private Window mWindow;
 
         private int mOuterMarginSize = 10;
+        
         private int mWindowRadius = 10;
+
+        private WindowDockPosition mDockPosition = WindowDockPosition.Undocked;
         #endregion
 
         #region Public Properties
@@ -23,11 +26,13 @@ namespace Chrome
 
         public double WindowMinimumHeight { get; set; } = 400;
 
-        public int ResizeBorder { get; set; } = 6;
+        public bool Borderless { get { return (mWindow.WindowState == WindowState.Maximized || mDockPosition != WindowDockPosition.Undocked); } }
+
+        public int ResizeBorder { get { return Borderless ? 0 : 6; } }
 
         public Thickness ResizeBorderThickness { get { return new Thickness(ResizeBorder + OuterMarginSize); } }
 
-        public Thickness InnerContentPadding { get { return new Thickness(ResizeBorder); } }
+        public Thickness InnerContentPadding { get; set; } = new Thickness(0);
 
         public int OuterMarginSize
         {
@@ -60,6 +65,8 @@ namespace Chrome
         public int TitleHeight { get; set; } = 42;
 
         public GridLength TitleHeightGridLength { get { return new GridLength(TitleHeight + ResizeBorder); } }
+
+        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.Login;
         #endregion
 
         #region Commands
