@@ -5,10 +5,16 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Chrome
 {
+    public class MyPasswordBox
+    {
+
+    }
+
     public class WindowViewModel : BaseViewModel
     {
         #region Private Member

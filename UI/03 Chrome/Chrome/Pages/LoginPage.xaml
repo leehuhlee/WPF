@@ -14,7 +14,7 @@
                 <ImageBrush TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 500 500" ImageSource="/Images/Backgrounds/emoji-background.png"/>
             </Grid.Background>
 
-            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <StackPanel 
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
@@ -37,7 +37,7 @@
                                        Margin="0 0 0 20"/>
 
                             <TextBox Tag="Email" />
-                            <TextBox Tag="Password" Margin="0 0 0 30"/>
+                            <PasswordBox local:PasswordBoxProperties.MornitorPassword="True" Tag="Password" Margin="0 0 0 30"/>
 
                             <Button Content="Next" HorizontalAlignment="Center"/>
 
