@@ -1,0 +1,128 @@
+﻿<local:BasePage x:TypeArguments="core:ChatMessageListViewModel" x:Class="Dialog.ChatPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Dialog"
+      xmlns:core="clr-namespace:Dialog.Core;assembly=Dialog.Core"
+      mc:Ignorable="d" 
+      x:Name="Page"
+      d:DesignHeight="700" d:DesignWidth="700"
+      >
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            
+            <RowDefinition Height="Auto" />
+            
+            <RowDefinition Height="*" />
+            
+            <RowDefinition Height="Auto" />
+            
+        </Grid.RowDefinitions>
+
+        <Border Background="Transparent" 
+                Grid.RowSpan="2"
+                Panel.ZIndex="1"
+                Visibility="{Binding AnyPopupVisible, Converter={local:BooleanToVisiblityConverter}, ConverterParameter=True}"
+                >
+            <Border.InputBindings>
+                <MouseBinding MouseAction="LeftClick" Command="{Binding PopupClickawayCommand}" />
+            </Border.InputBindings>
+        </Border>
+
+        <Grid Height="50">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Parnell" 
+                       Grid.ColumnSpan="2"
+                       Foreground="{StaticResource ForegroundLightBrush}"
+                       FontSize="{StaticResource FontSizeXLarge}"
+                       FontFamily="{StaticResource LatoRegular}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       />
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <Button Style="{StaticResource IconGrowButton}" Content="{StaticResource FontAwesomeSearchIcon}" />
+                <Button Style="{StaticResource IconGrowButton}" Content="{StaticResource FontAwesomeEllipsisVerticalIcon}" />
+            </StackPanel>
+
+        </Grid>
+        
+        <local:ChatMessageListControl Grid.Row="1" />
+        
+        <local:BubbleContent 
+            Grid.Row="1"
+            Panel.ZIndex="2"
+            DataContext="{Binding AttachmentMenu}"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Left"
+            local:AnimateSlideInFromBottomProperty.Value="{Binding ViewModel.AttachmentMenuVisible, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:ChatPage}}}"
+            />
+
+        <Grid Grid.Row="2" 
+              Panel.ZIndex="3"
+              MinHeight="50"
+              MaxHeight="114"
+              Background="{StaticResource ForegroundLightBrush}"
+              >
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                
+                <ColumnDefinition Width="*" />
+                
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button Style="{StaticResource IconGrowButton}"
+                    Height="{Binding MinHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
+                    Content="{StaticResource FontAwesomePaperclipIcon}"
+                    VerticalAlignment="Top"
+                    Command="{Binding AttachmentButtonCommand}"
+                    Foreground="{StaticResource ForegroundDarkBrush}"
+                    />
+
+            <TextBox Grid.Column="1" 
+                     Tag="Write a message..."
+                     FontSize="{StaticResource FontSizeRegular}"
+                     VerticalAlignment="Center"
+                     BorderThickness="0"
+                     Padding="0 10 10 10"
+                     AcceptsReturn="True"
+                     AcceptsTab="True"
+                     VerticalScrollBarVisibility="Auto"
+                     />
+
+            <StackPanel Grid.Column="2"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Top"
+                        Margin="0 0 8 0"
+                        >
+
+                <Button Style="{StaticResource IconGrowButton}"
+                    Height="{Binding MinHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
+                    Content="{StaticResource FontAwesomeEmojiIcon}"
+                    Foreground="{StaticResource WordOrangeBrush}"
+                    />
+                
+                <Button Content="Send"
+                        Padding="8"
+                        Command="{Binding SendCommand}"
+                        Background="{StaticResource WordGreenBrush}"
+                        FontSize="{StaticResource FontSizeRegular}"
+                        />
+
+            </StackPanel>
+
+        </Grid>
+        
+    </Grid>
+</local:BasePage>
